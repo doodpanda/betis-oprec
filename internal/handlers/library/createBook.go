@@ -11,7 +11,7 @@ import (
 )
 
 // BookCreate handles the creation of a new MagicBook.
-func BookCreate(c *fiber.Ctx) error {
+func CreateBook(c *fiber.Ctx) error {
 	db := database.DB
 
 	// Parse request body into the BookCreateRequest struct
