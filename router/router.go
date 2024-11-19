@@ -12,4 +12,5 @@ func SetupRoutes(app *fiber.App) {
 
 	// Setup the Node Routes
 	routes.SetupLibraryRoutes(api)
+	routes.SetupWitchRoutes(api)
 }
