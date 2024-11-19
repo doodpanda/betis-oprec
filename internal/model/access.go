@@ -12,7 +12,7 @@ type AccessPermission struct {
 	ID          uuid.UUID `gorm:"type:uuid;primaryKey"`
 	WitchID     uuid.UUID `gorm:"type:uuid;not null"`
 	MagicBookID uuid.UUID `gorm:"type:uuid;not null"`
-	AccessDate  time.Time `gorm:"not null"`
+	PermitDate  time.Time `gorm:"not null"`
 
 	// Relationships
 	Witch     Witch     `gorm:"foreignKey:WitchID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`

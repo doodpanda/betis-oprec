@@ -3,15 +3,15 @@ package accessHandlers
 import "github.com/google/uuid"
 
 type AccessCreateRequest struct {
-	WitchID string `json:"witch_id"`
-	BookID  string `json:"book_id"`
+	WitchID     string `json:"witch_id"`
+	MagicBookID string `json:"book_id"`
 }
 
 type AccessInfoResponse struct {
-	ID         uuid.UUID `json:"id"`
-	WitchID    uuid.UUID `json:"witch_id"`
-	BookID     uuid.UUID `json:"book_id"`
-	PermitDate string    `json:"permit_date"`
+	ID          uuid.UUID `json:"id"`
+	WitchID     uuid.UUID `json:"witch_id"`
+	MagicBookID uuid.UUID `json:"book_id"`
+	PermitDate  string    `json:"permit_date"`
 }
 
 type AccessDeleteRequest struct {
