@@ -25,11 +25,14 @@ func DeleteWitch(c *fiber.Ctx) error {
 		})
 	}
 
-	delWitch := model.Witch{
-		ID: id,
+	var existingWitch model.Witch
+	if err := db.First(&existingWitch, "id = ?", id).Error; err != nil {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"message": "Witch not found",
+		})
 	}
 
-	if err := db.Delete(&delWitch, c.Params("id")).Error; err != nil {
+	if err := db.Delete(&existingWitch).Error; err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"message": "Failed to delete witch!",
 		})

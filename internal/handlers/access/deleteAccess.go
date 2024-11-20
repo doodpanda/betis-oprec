@@ -11,6 +11,11 @@ func DeleteAccess(c *fiber.Ctx) error {
 	db := database.DB
 
 	accessID := c.Query("id")
+	if accessID == "" {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"message": "Access ID is required",
+		})
+	}
 
 	var access model.AccessPermission
 	if err := db.First(&access, "id = ?", accessID).Error; err != nil {

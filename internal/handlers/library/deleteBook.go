@@ -25,11 +25,14 @@ func DeleteBook(c *fiber.Ctx) error {
 		})
 	}
 
-	delBook := model.MagicBook{
-		ID: id,
+	var existingBook model.MagicBook
+	if err := db.First(&existingBook, "id = ?", id).Error; err != nil {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"message": "Book not found",
+		})
 	}
 
-	if err := db.Delete(&delBook, c.Params("id")).Error; err != nil {
+	if err := db.Delete(&existingBook).Error; err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"message": "Failed to delete book!",
 		})
