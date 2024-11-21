@@ -1,6 +1,10 @@
 package libraryHandlers
 
-import "github.com/google/uuid"
+import (
+	"github.com/google/uuid"
+
+	"betis-oprec/internal/model"
+)
 
 type BookType string
 
@@ -14,19 +18,19 @@ const (
 type BookInfoResponse struct {
 	ID        uuid.UUID `json:"id"`
 	Title     string    `json:"title"`
-	MagicType BookType  `json:"type"`
+	MagicType BookType  `json:"magic_type"`
 }
 
 type BookCreateRequest struct {
 	Title     string   `json:"title"`
-	MagicType BookType `json:"type"`
+	MagicType BookType `json:"magic_type"`
 	Status    bool     `json:"status"`
 }
 
 type BookUpdateRequest struct {
 	ID        string   `json:"id"`
 	Title     string   `json:"title"`
-	MagicType BookType `json:"type"`
+	MagicType BookType `json:"magic_type"`
 	Status    bool     `json:"status"`
 }
 
@@ -40,9 +44,11 @@ type BookListRequest struct {
 }
 
 type BookListResponse struct {
-	Books   []BookInfoResponse `json:"books"`
-	Total   int                `json:"total"`
-	HasNext bool               `json:"has_next"`
+	Books     []model.MagicBook `json:"magic_books"`
+	Total     int               `json:"total"`
+	HasNext   bool              `json:"has_next"`
+	Page      int               `json:"page"`
+	TotalPage int               `json:"total_page"`
 }
 
 type BookDetailRequest struct {

@@ -14,9 +14,14 @@ func CreateAccess(c *fiber.Ctx) error {
 	db := database.DB
 
 	access := new(AccessCreateRequest)
+	if err := c.BodyParser(access); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"message": "Malformed request",
+		})
+	}
 
 	var witch model.Witch
-	if err := db.First(&witch, "id = ?", access.WitchID).Error; err != nil {
+	if err := db.First(&witch, "id = ?", uuid.MustParse(access.WitchID)).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
 				"message": "Witch not found",
@@ -28,7 +33,7 @@ func CreateAccess(c *fiber.Ctx) error {
 	}
 
 	var magicBook model.MagicBook
-	if err := db.First(&magicBook, "id = ?", access.MagicBookID).Error; err != nil {
+	if err := db.First(&magicBook, "id = ?", uuid.MustParse(access.MagicBookID)).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
 				"message": "Magic book not found",
@@ -36,11 +41,6 @@ func CreateAccess(c *fiber.Ctx) error {
 		}
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"message": "Failed to query magic book",
-		})
-	}
-	if err := c.BodyParser(access); err != nil {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"message": "Malformed request",
 		})
 	}
 
@@ -57,5 +57,5 @@ func CreateAccess(c *fiber.Ctx) error {
 		})
 	}
 
-	return c.Status(fiber.StatusOK).JSON(access)
+	return c.Status(fiber.StatusOK).JSON(newAccess)
 }

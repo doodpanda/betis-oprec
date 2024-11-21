@@ -16,12 +16,25 @@ func GetBook(c *fiber.Ctx) error {
 
 	// Validate the book ID
 	if bookID == "" {
-		var magicBooks []model.MagicBook
-		if err := db.Find(&magicBooks).Error; err != nil {
+		limit := c.QueryInt("limit", 10) // default limit is 10
+		page := c.QueryInt("page", 1)    // default page is 1
+		offset := (page - 1) * limit
+
+		var magicBooks BookListResponse
+		if err := db.Limit(limit).Offset(offset).Find(&magicBooks.Books).Error; err != nil {
 			return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
 				"message": "Failed to retrieve books",
 			})
 		}
+
+		// Get the total number of books and determine if there are more books
+		var total int64
+		db.Model(&model.MagicBook{}).Count(&total)              // Gets the total count of books in the database
+		magicBooks.Total = int(total)                           // Number of books fetched in the current operation
+		magicBooks.HasNext = magicBooks.Total*page < int(total) // Check if there are more books to fetch
+		magicBooks.Page = page                                  // Current page
+		magicBooks.TotalPage = int(total)/limit + 1             // Total number of pages
+
 		return c.Status(fiber.StatusOK).JSON(magicBooks)
 	}
 

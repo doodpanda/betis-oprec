@@ -1,17 +1,21 @@
 package accessHandlers
 
-import "github.com/google/uuid"
+import (
+	"betis-oprec/internal/model"
+
+	"github.com/google/uuid"
+)
 
 type AccessCreateRequest struct {
 	WitchID     string `json:"witch_id"`
-	MagicBookID string `json:"book_id"`
+	MagicBookID string `json:"magicbook_id"`
 }
 
 type AccessInfoResponse struct {
 	ID          uuid.UUID `json:"id"`
 	WitchID     uuid.UUID `json:"witch_id"`
 	MagicBookID uuid.UUID `json:"book_id"`
-	PermitDate  string    `json:"permit_date"`
+	AccessDate  string    `json:"_date"`
 }
 
 type AccessDeleteRequest struct {
@@ -28,7 +32,9 @@ type AccessListRequest struct {
 }
 
 type AccessListResponse struct {
-	Accesses []AccessInfoResponse `json:"accesses"`
-	Total    int                  `json:"total"`
-	HasNext  bool                 `json:"has_next"`
+	Accesses  []model.AccessPermission `json:"accesses"`
+	Total     int                      `json:"total"`
+	HasNext   bool                     `json:"has_next"`
+	Page      int                      `json:"page"`
+	TotalPage int                      `json:"total_page"`
 }
