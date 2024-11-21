@@ -10,6 +10,18 @@ import (
 	"gorm.io/gorm"
 )
 
+// CreateAccess handles the creation of a new access permission for a witch to a magic book.
+// @Summary Create a new access permission
+// @Description Create a new access permission for a witch to a magic book
+// @Tags access
+// @Accept json
+// @Produce json
+// @Param access body AccessCreateRequest true "Access Create Request"
+// @Success 200 {object} model.AccessPermission
+// @Failure 400 {object} fiber.Map{"message": string}
+// @Failure 404 {object} fiber.Map{"message": string}
+// @Failure 500 {object} fiber.Map{"message": string}
+// @Router /access [post]
 func CreateAccess(c *fiber.Ctx) error {
 	db := database.DB
 
@@ -20,8 +32,22 @@ func CreateAccess(c *fiber.Ctx) error {
 		})
 	}
 
+	witchID, err := uuid.Parse(access.WitchID)
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"message": "Invalid WitchID",
+		})
+	}
+
+	magicBookID, err := uuid.Parse(access.MagicBookID)
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"message": "Invalid MagicBookID",
+		})
+	}
+
 	var witch model.Witch
-	if err := db.First(&witch, "id = ?", uuid.MustParse(access.WitchID)).Error; err != nil {
+	if err := db.First(&witch, "id = ?", witchID).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
 				"message": "Witch not found",
@@ -33,7 +59,7 @@ func CreateAccess(c *fiber.Ctx) error {
 	}
 
 	var magicBook model.MagicBook
-	if err := db.First(&magicBook, "id = ?", uuid.MustParse(access.MagicBookID)).Error; err != nil {
+	if err := db.First(&magicBook, "id = ?", magicBookID).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
 				"message": "Magic book not found",
@@ -46,8 +72,8 @@ func CreateAccess(c *fiber.Ctx) error {
 
 	newAccess := model.AccessPermission{
 		ID:          uuid.New(),
-		WitchID:     uuid.MustParse(access.WitchID),
-		MagicBookID: uuid.MustParse(access.MagicBookID),
+		WitchID:     witchID,
+		MagicBookID: magicBookID,
 		PermitDate:  time.Now(),
 	}
 

@@ -38,6 +38,12 @@ func ConnectDB() {
 
 }
 
+// MigrateDB connects to the database using configuration parameters and performs
+// automatic migration for the specified models. It retrieves the database connection
+// details from the configuration, constructs the DSN (Data Source Name), and opens
+// a connection to the PostgreSQL database using GORM. If the connection or migration
+// fails, it logs a fatal error and terminates the program. Upon successful migration,
+// it logs a completion message.
 func MigrateDB() {
 	p := config.Config("DB_PORT")
 	port, err := strconv.ParseUint(p, 10, 32)

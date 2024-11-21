@@ -2,39 +2,42 @@ package accessHandlers
 
 import (
 	"betis-oprec/internal/model"
+	"time"
 
 	"github.com/google/uuid"
 )
 
 type AccessCreateRequest struct {
-	WitchID     string `json:"witch_id"`
-	MagicBookID string `json:"magicbook_id"`
+	WitchID     string `json:"WitchId"`
+	MagicBookID string `json:"MagicBookId"`
 }
 
 type AccessInfoResponse struct {
-	ID          uuid.UUID `json:"id"`
-	WitchID     uuid.UUID `json:"witch_id"`
-	MagicBookID uuid.UUID `json:"book_id"`
-	AccessDate  string    `json:"_date"`
+	ID          uuid.UUID       `json:"Id"`
+	WitchID     uuid.UUID       `json:"WitchId"`
+	MagicBookID uuid.UUID       `json:"BookId"`
+	PermitDate  time.Time       `json:"PermitDate"`
+	Witch       model.Witch     `json:"Witch"`
+	MagicBook   model.MagicBook `json:"MagicBook"`
 }
 
 type AccessDeleteRequest struct {
-	ID string `json:"id"`
+	ID string `json:"Id"`
 }
 
 type AccessDeleteResponse struct {
-	ID string `json:"id"`
+	ID string `json:"Id"`
 }
 
 type AccessListRequest struct {
-	Page  int `json:"page"`
-	Limit int `json:"limit"`
+	Page  int `json:"Page"`
+	Limit int `json:"Limit"`
 }
 
 type AccessListResponse struct {
-	Accesses  []model.AccessPermission `json:"accesses"`
-	Total     int                      `json:"total"`
-	HasNext   bool                     `json:"has_next"`
-	Page      int                      `json:"page"`
-	TotalPage int                      `json:"total_page"`
+	Accesses  []model.AccessPermission `json:"Accesses"`
+	Total     int                      `json:"Total"`
+	HasNext   bool                     `json:"HasNext"`
+	Page      int                      `json:"Page"`
+	TotalPage int                      `json:"TotalPage"`
 }

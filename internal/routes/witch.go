@@ -8,10 +8,10 @@ import (
 
 // SetupWitchRoutes sets up the routes for the witch handler
 func SetupWitchRoutes(router fiber.Router) {
-	witch := router.Group("/witch") // Create a new group for the witch handler
+	witch := router.Group("/witch")
 
-	witch.Post("/", witchHandler.CreateWitch)   // Create a new witch
-	witch.Delete("/", witchHandler.DeleteWitch) // Delete a witch
-	witch.Get("/", witchHandler.GetWitch)       // Get a witch
-	witch.Patch("/", witchHandler.UpdateWitch)  // Update a witch
+	witch.Post("/", witchHandler.CreateWitch)
+	witch.Delete("/", witchHandler.DeleteWitch)
+	witch.Get("/", witchHandler.GetWitch)
+	witch.Patch("/", witchHandler.UpdateWitch)
 }

@@ -8,6 +8,19 @@ import (
 	"github.com/google/uuid"
 )
 
+// DeleteBook handles the deletion of a book from the library.
+// @Summary Delete a book
+// @Description Deletes a book from the library based on the provided UUID.
+// @Tags books
+// @Accept json
+// @Produce json
+// @Param book body BookDeleteRequest true "Book Delete Request"
+// @Success 200 {object} map[string]interface{} "id"
+// @Failure 400 {object} map[string]interface{} "Malformed request or Invalid UUID format"
+// @Failure 404 {object} map[string]interface{} "Book not found"
+// @Failure 500 {object} map[string]interface{} "Failed to delete book"
+// @Router /books [delete]
+
 func DeleteBook(c *fiber.Ctx) error {
 	db := database.DB
 

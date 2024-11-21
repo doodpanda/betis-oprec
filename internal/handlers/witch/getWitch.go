@@ -23,11 +23,22 @@ func GetWitch(c *fiber.Ctx) error {
 	}
 
 	var witch model.Witch
+	var witchResponse WitchInfoResponse
+	var accesses []model.AccessPermission
 	if err := db.First(&witch, "id = ?", witchID).Error; err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
 			"message": "Witch not found",
 		})
 	}
 
-	return c.Status(fiber.StatusOK).JSON(witch)
+	if err := db.Find(&accesses, "witch_id = ?", witchID).Error; err != nil {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"message": "Failed to retrieve access",
+		})
+	}
+	witchResponse.ID = witch.ID
+	witchResponse.Name = witch.Name
+	witchResponse.Rank = witch.Rank
+	witchResponse.Accesses = accesses
+	return c.Status(fiber.StatusOK).JSON(witchResponse)
 }

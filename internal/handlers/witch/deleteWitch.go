@@ -8,6 +8,19 @@ import (
 	"github.com/google/uuid"
 )
 
+// DeleteWitch handles the deletion of a witch record from the database.
+//
+// @Summary Delete a witch
+// @Description Deletes a witch record based on the provided UUID.
+// @Tags witches
+// @Accept json
+// @Produce json
+// @Param witch body WitchDeleteRequest true "Witch Delete Request"
+// @Success 200 {object} map[string]interface{} "Successfully deleted witch"
+// @Failure 400 {object} map[string]interface{} "Malformed request or invalid UUID format"
+// @Failure 404 {object} map[string]interface{} "Witch not found"
+// @Failure 500 {object} map[string]interface{} "Failed to delete witch"
+// @Router /witches/{id} [delete]
 func DeleteWitch(c *fiber.Ctx) error {
 	db := database.DB
 

@@ -5,7 +5,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// Wizard represents the structure of a wizard in the system.
+// Wizard represents the struct of a wizard in the system.
 type Witch struct {
 	ID   uuid.UUID `gorm:"type:uuid;primaryKey"`
 	Name string    `gorm:"type:varchar(255);not null"`

@@ -8,6 +8,18 @@ import (
 	"github.com/google/uuid"
 )
 
+// UpdateBook updates an existing book in the database.
+// @Summary Update an existing book
+// @Description Update the details of an existing book by its UUID
+// @Tags books
+// @Accept json
+// @Produce json
+// @Param book body BookUpdateRequest true "Book Update Request"
+// @Success 200 {object} model.MagicBook "Successfully updated book"
+// @Failure 400 {object} fiber.Map "Malformed request or invalid UUID format"
+// @Failure 404 {object} fiber.Map "Book not found"
+// @Failure 500 {object} fiber.Map "Failed to modify book"
+// @Router /books [put]
 func UpdateBook(c *fiber.Ctx) error {
 	db := database.DB
 

@@ -7,7 +7,21 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-// getBook handles the retrieval of a MagicBook by its ID.
+// GetBook handles the retrieval of a book or a list of books from the database.
+//
+// @Summary Retrieve a book or a list of books
+// @Description This endpoint retrieves a single book by its ID or a paginated list of books if no ID is provided.
+// @Tags books
+// @Accept json
+// @Produce json
+// @Param id query string false "Book ID"
+// @Param limit query int false "Number of books to retrieve per page" default(10)
+// @Param page query int false "Page number to retrieve" default(1)
+// @Success 200 {object} model.MagicBook "Single book retrieved successfully"
+// @Success 200 {object} BookListResponse "List of books retrieved successfully"
+// @Failure 404 {object} fiber.Map "Book not found or failed to retrieve books"
+// @Router /books [get]
+
 func GetBook(c *fiber.Ctx) error {
 	db := database.DB
 

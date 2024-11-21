@@ -8,6 +8,19 @@ import (
 	"github.com/google/uuid"
 )
 
+// UpdateWitch updates an existing witch's details in the database.
+//
+// @Summary Update witch
+// @Description Update the details of an existing witch by ID.
+// @Tags witches
+// @Accept json
+// @Produce json
+// @Param witch body WitchUpdateRequest true "Witch Update Request"
+// @Success 200 {object} model.Witch "Successfully updated witch"
+// @Failure 400 {object} fiber.Map "Malformed request or invalid UUID format"
+// @Failure 404 {object} fiber.Map "Witch not found"
+// @Failure 500 {object} fiber.Map "Failed to modify witch"
+// @Router /witch/update [put]
 func UpdateWitch(c *fiber.Ctx) error {
 	db := database.DB
 

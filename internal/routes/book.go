@@ -6,6 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// SetupLibraryRoutes sets up the routes for the book handler
 func SetupLibraryRoutes(router fiber.Router) {
 	library := router.Group("/library")
 

@@ -10,6 +10,18 @@ import (
 )
 
 // WitchCreate handles the creation of a new Witch.
+// CreateWitch handles the creation of a new witch.
+//
+// @Summary Create a new witch
+// @Description This endpoint creates a new witch with the provided details in the request body.
+// @Tags witches
+// @Accept json
+// @Produce json
+// @Param witch body WitchCreateRequest true "Witch Create Request"
+// @Success 201 {object} model.Witch "Created witch"
+// @Failure 400 {object} fiber.Map "Malformed request or invalid role"
+// @Failure 500 {object} fiber.Map "Failed to add witch"
+// @Router /witches [post]
 func CreateWitch(c *fiber.Ctx) error {
 	db := database.DB
 

@@ -8,9 +8,9 @@ import (
 
 // SetupAccessRoutes sets up the routes for the access handler
 func SetupAccessRoutes(router fiber.Router) {
-	access := router.Group("/access") // Create a new group for the access handler
+	access := router.Group("/access")
 
-	access.Post("/", accessHandler.CreateAccess)   // Create a new access
-	access.Delete("/", accessHandler.DeleteAccess) // Delete an access
-	access.Get("/", accessHandler.GetAccess)       // Get an access
+	access.Post("/", accessHandler.CreateAccess)
+	access.Delete("/", accessHandler.DeleteAccess)
+	access.Get("/", accessHandler.GetAccess)
 }

@@ -10,7 +10,18 @@ import (
 	"github.com/google/uuid"
 )
 
-// BookCreate handles the creation of a new MagicBook.
+// CreateBook handles the creation of a new magic book.
+// @Summary Create a new magic book
+// @Description Parses the request body to create a new magic book and saves it to the database.
+// @Tags books
+// @Accept json
+// @Produce json
+// @Param book body BookCreateRequest true "Book Create Request"
+// @Success 201 {object} model.MagicBook
+// @Failure 400 {object} fiber.Map "Malformed request or invalid magic type"
+// @Failure 500 {object} fiber.Map "Failed to add book"
+// @Router /books [post]
+
 func CreateBook(c *fiber.Ctx) error {
 	db := database.DB
 

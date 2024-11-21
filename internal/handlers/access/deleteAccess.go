@@ -7,6 +7,18 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// DeleteAccess handles the deletion of an access permission.
+// @Summary Delete an access permission
+// @Description Deletes an access permission based on the provided access ID.
+// @Tags access
+// @Accept json
+// @Produce json
+// @Param id query string true "Access ID"
+// @Success 200 {object} map[string]interface{} "Access deleted successfully"
+// @Failure 400 {object} map[string]interface{} "Access ID is required"
+// @Failure 404 {object} map[string]interface{} "Access not found"
+// @Failure 500 {object} map[string]interface{} "Failed to delete access"
+// @Router /access [delete]
 func DeleteAccess(c *fiber.Ctx) error {
 	db := database.DB
 
