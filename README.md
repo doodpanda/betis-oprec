@@ -20,7 +20,7 @@ _Pemenuhan tugas open recruitment BETIS 2025 Webdev Backend._
 ### 1. Clone Repository
 
 ```bash
-git clone [https://github.com/username/betis-oprec.git](https://github.com/doodpanda/betis-oprec/)
+git clone https://github.com/doodpanda/betis-oprec/
 cd betis-oprec
 ```
 
