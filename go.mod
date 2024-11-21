@@ -1,6 +1,6 @@
 module betis-oprec
 
-go 1.22.9
+go 1.22
 
 require (
 	github.com/gofiber/fiber/v2 v2.52.5
