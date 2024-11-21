@@ -8,11 +8,11 @@ _Pemenuhan tugas open recruitment BETIS 2025 Webdev Backend._
 
 ## 🛠️ Teknologi yang Digunakan
 
-- **Go (Golang)**: Backend yang efisien dan cepat.
+- **Go (Golang)**
 - **PostgreSQL**: Database relasional untuk menyimpan data.
 - **Fiber**: Framework web ringan dan performa tinggi.
-- **Docker**: Untuk containerization dan pengelolaan lingkungan.
-
+- **GORM** : ORM untuk GO.
+  
 ---
 
 ## 🚀 Cara Menjalankan Proyek
