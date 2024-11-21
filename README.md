@@ -1,9 +1,9 @@
 # 📜 BETIS Open Recruitment
-Vincentius Filbert Amadeo - 2406351711 - Angkatan Cosmic
+Vincentius Filbert Amadeo - 2406351711 - Cosmic
 ---
 
 _Pemenuhan tugas open recruitment BETIS 2025 Webdev Backend._
-
+🔗[Postman API Docs](https://www.postman.com/avionics-administrator-72819130/oprec-betis-2025/collection/dvzpzsx/betis-oprec?action=share&creator=21404787)
 ---
 
 ## 🛠️ Teknologi yang Digunakan
